@@ -12,30 +12,51 @@
         var word = words[Math.floor(Math.random() * words.length)];
 
         var answerArray = [];
-        for(var i=0; i<word.length; i++){
+        for (var i = 0; i < word.length; i++) {
             answerArray[i] = "_";
         }
         var remainingLetters = word.length;
+        var maxGuesses = 3;
 
-        while(remainingLetters > 0){
+        var guesses = 0;
+        var guessedLetters = [];
+
+        while (remainingLetters > 0 && guesses < maxGuesses) {
             alert(answerArray.join(" "));
 
-            var guess = prompt("Guess a letter, or click Cancel to stop playing.");
-            if(guess === null){
+            var guess = prompt("Guess a letter, or click Cancel to stop playing.").toLowerCase();
+            if (guess === null) {
                 break;
-            }else if(guess.length !== 1){
+            } else if (guess.length !== 1) {
                 alert("Please enter a single letter.");
-            }else{
-                for(var j=0; j<word.length; j++){
-                    if(word[j] === guess){
+            } else if (guessedLetters.includes(guess)) {
+                alert("You already guessed that letter.");
+            } else {
+                var isCorrectGuess = false;
+                var isNewGuess = true;
+                for (var j = 0; j < word.length; j++) {
+                    if (word[j] === guess) {
                         answerArray[j] = guess;
                         remainingLetters--;
+                        isCorrectGuess = true;
+                    }
+                    if(answerArray[j] === guess){
+                        isNewGuess = false;
                     }
                 }
+                if (!isCorrectGuess && isNewGuess) {
+                    alert("Incorrect Guess!");
+                    guesses++;
+                }
+                guessedLetters.push(guess);
             }
         }
-        alert(answerArray.join(" "));
-        alert("Good job! The answer was " +word);
+        if(remainingLetters === 0){
+            alert(answerArray.join(" "));
+            alert("Good job! The answer was " + word);
+        }else{
+            alert("You ran out of guesses.The answer was " +word);
+        }
     </script>
 </body>
 </html>
