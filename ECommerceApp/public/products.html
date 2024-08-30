@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Clothing Store - Products</title>
+    <link rel="stylesheet" href="css/styles.css">
+    <link rel="stylesheet" href="css/product-page.css">
+    <link rel="stylesheet" href="css/ratings-reviews.css">
+</head>
+<body>
+    <header>
+        <nav class="container">
+            <ul>
+                <li><a href="/">Home</a></li>
+                <li><a href="/public/products.html" class="active">Products</a></li>
+                <li><a href="/public/login.html">Login</a></li>
+                <li><a href="/public/register.html">Register</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main class="container">
+        <h1>Our Products</h1>
+
+        <input type="text" id="search-input" placeholder="Search products...">
+
+        <select id="sort-select">
+            <option value="none">Sort by</option>
+            <option value="lowToHigh">Price: Low to High</option>
+            <option value="highToLow">Price: High to Low</option>
+        </select>
+        
+        <div class="category-filter">
+            <button class="filter-btn active" data-category="all">All</button>
+            <button class="filter-btn" data-category="men">Men</button>
+            <button class="filter-btn" data-category="women">Women</button>
+            <button class="filter-btn" data-category="kids">Kids</button>
+        </div>
+
+        <div class="product-grid" id="product-grid">
+            <!-- Products will be dynamically inserted here -->
+        </div>
+
+        <div id="ratings-reviews" class="ratings-reviews">
+            <h2>Product Ratings and Reviews</h2>
+            <div class="average-rating">
+                <span id="average-rating">0</span>/5
+                <span id="star-rating">☆☆☆☆☆</span>
+            </div>
+            <div id="review-list" class="review-list">
+                <!-- Reviews will be dynamically added here -->
+            </div>
+            <div class="review-form">
+                <h3>Add a Review</h3>
+                <form id="review-form">
+                    <div>
+                        <label for="rating">Rating:</label>
+                        <select id="rating" required>
+                            <option value="5">5 Stars</option>
+                            <option value="4">4 Stars</option>
+                            <option value="3">3 Stars</option>
+                            <option value="2">2 Stars</option>
+                            <option value="1">1 Star</option>
+                        </select>
+                    </div>
+                    <div>
+                        <label for="review-text">Review:</label>
+                        <textarea id="review-text" required></textarea>
+                    </div>
+                    <button type="submit">Submit Review</button>
+                </form>
+            </div>
+        </div>
+    </main>
+
+    <div class="cart-buttons">
+        <div id="clear-cart-button" class="clear-cart-button">
+            <span>Clear Cart</span>
+        </div>
+        <div id="cart-button" class="cart-button">
+            <span id="cart-count" class="cart-count">0</span>
+            <span>Cart</span>
+        </div>
+    </div>
+
+    <footer>
+        <p>&copy; 2024 Your Clothing Store. All rights reserved.</p>
+    </footer>
+
+    <script src="js/product-page.js"></script>
+    <script src="js/ratings-reviews.js"></script>
+</body>
+</html>
