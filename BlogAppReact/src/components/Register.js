@@ -16,7 +16,8 @@ function Register() {
     setError('');
     try {
       const data = await apiRegister(name, email, password);
-      login(data.token, data.userId); // Use login function from AuthContext
+      // Pass user data directly to login function
+      login(data.token, data.userId, data.user);
       navigate('/dashboard');
     } catch (err) {
       setError(err.response?.data?.message || err.message || 'An error occurred during registration');

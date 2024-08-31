@@ -3,7 +3,7 @@ const API_BASE_URL = 'http://localhost:5000/api';
 export default API_BASE_URL;
 
 export const getPosts = async () => {
-    const response = await fetch('http://your-api-url/posts');
+    const response = await fetch('http://localhost:5000/api/posts');
     if (!response.ok) {
       throw new Error('Failed to fetch posts');
     }

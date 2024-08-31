@@ -83,43 +83,43 @@ export const getUserProfile = () =>
     },
   });
 
-  export const getUserData = async (userId, token) => {
-    const response = await fetch(`/api/users/${userId}`, {
-      headers: {
-        'Authorization': `Bearer ${token}`
-      }
-    });
-    if (!response.ok) {
-      throw new Error('Failed to fetch user data');
-    }
-    return response.json();
-  };
-
 export const apiLogin = async (email, password) => {
-    try {
-      const response = await fetch('/api/login', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({ email, password }),
-      });
-  
-      const responseText = await response.text();
-      console.log('Full server response:', responseText);
-  
-      if (!response.ok) {
-        throw new Error(`HTTP error! status: ${response.status}, body: ${responseText}`);
-      }
-  
-      try {
-        return JSON.parse(responseText);
-      } catch (error) {
-        console.error('Error parsing JSON:', error);
-        throw new Error('Invalid JSON response from server');
-      }
-    } catch (error) {
-      console.error('Login error:', error);
-      throw error;
+  try {
+    const response = await fetch(`${API_BASE_URL}/auth/login`, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({ email, password }),
+    });
+
+    const responseText = await response.text();
+    console.log('Full server response:', responseText);
+
+    if (!response.ok) {
+      throw new Error(`HTTP error! status: ${response.status}, body: ${responseText}`);
     }
-  };
+
+    try {
+      return JSON.parse(responseText);
+    } catch (error) {
+      console.error('Error parsing JSON:', error);
+      throw new Error(`Invalid JSON response from server: ${responseText}`);
+    }
+  } catch (error) {
+    console.error('Login error:', error);
+    throw error;
+  }
+};
+
+export const getUserData = async (userId, token) => {
+  const response = await fetch(`${API_BASE_URL}/users/${userId}`, {
+    headers: {
+      'Authorization': `Bearer ${token}`
+    }
+  });
+  if (!response.ok) {
+    throw new Error('Failed to fetch user data');
+  }
+  return response.json();
+};
